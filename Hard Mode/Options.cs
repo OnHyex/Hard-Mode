@@ -13,6 +13,7 @@ namespace Hard_Mode
         public static bool WeakReactor = false;
         public static bool SpinningCycpher = false;
         public static bool AdvancedCloak = false;
+        public static bool ScalingToPlayerShipLevel = true;
     }
     internal class Config : ModSettingsMenu
     {
@@ -39,6 +40,8 @@ namespace Hard_Mode
             GUILayout.Label("Makes Cyphers slowly spin");
             Options.AdvancedCloak = GUILayout.Toggle(Options.AdvancedCloak, "Advanced Cloak");
             GUILayout.Label("Revamps the cloaking system");
+            Options.ScalingToPlayerShipLevel = GUILayout.Toggle(Options.ScalingToPlayerShipLevel, "Scaling Enemies From Player Strength");
+            GUILayout.Label("Enables the enemy ships and crew scaling based off the strength of your ship");
         }
     }
 
@@ -52,6 +55,7 @@ namespace Hard_Mode
             Options.WeakReactor = (bool)arguments[3];
             Options.SpinningCycpher = (bool)arguments[4];
             Options.AdvancedCloak = (bool)arguments[5];
+            Options.ScalingToPlayerShipLevel = (bool)arguments[6];
         }
     }
     [HarmonyPatch(typeof(PLServer), "ServerSendClientStarmap")]
@@ -86,6 +90,7 @@ namespace Hard_Mode
                 Options.DangerousReactor = false;
                 Options.WeakReactor = false;
                 Options.SpinningCycpher = false;
+                Options.ScalingToPlayerShipLevel = false;
             }
             else 
             {

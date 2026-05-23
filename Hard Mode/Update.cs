@@ -45,6 +45,7 @@ namespace Hard_Mode
                     Options.WeakReactor,
                     Options.SpinningCycpher,
                     Options.AdvancedCloak,
+                    Options.ScalingToPlayerShipLevel,
                 });
                 if (Time.time - LastGalaxySync > 30 && PLServer.GetCurrentSector().VisualIndication != ESectorVisualIndication.ABYSS)//Syncs the discovered sectors with all clients every 30 seconds
                 {

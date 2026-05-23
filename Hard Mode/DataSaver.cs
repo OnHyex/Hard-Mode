@@ -5,7 +5,7 @@ namespace Hard_Mode
 {
     internal class DataSaver : PMLSaveData
     {
-        public override uint VersionID => 160;
+        public override uint VersionID => 180;
 
         public override string Identifier()
         {
@@ -29,6 +29,10 @@ namespace Hard_Mode
                     {
                         Options.AdvancedCloak = binaryReader.ReadBoolean();
                     }
+                    if (VersionID >= 180)
+                    {
+                        Options.ScalingToPlayerShipLevel = binaryReader.ReadBoolean();
+                    }
                 }
             }
         }
@@ -44,6 +48,7 @@ namespace Hard_Mode
                     binaryWriter.Write(Options.WeakReactor);
                     binaryWriter.Write(Options.SpinningCycpher);
                     binaryWriter.Write(Options.AdvancedCloak);
+                    binaryWriter.Write(Options.ScalingToPlayerShipLevel);
                 }
                 return stream.ToArray();
             }
