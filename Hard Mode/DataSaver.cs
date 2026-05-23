@@ -18,7 +18,7 @@ namespace Hard_Mode
             {
                 using (BinaryReader binaryReader = new BinaryReader(dataStream))
                 {
-                    if (VersionID <= 140)
+                    if (VersionID >= 140)
                     {
                         Options.FogOfWar = binaryReader.ReadBoolean();
                         Options.DangerousReactor = binaryReader.ReadBoolean();
