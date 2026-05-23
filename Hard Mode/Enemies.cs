@@ -35,7 +35,7 @@ namespace Hard_Mode
             if (inPlayer != null && inPlayer.StartingShip != null)
             {
                 if (inPlayer.StartingShip.IsRelicHunter || inPlayer.StartingShip.IsBountyHunter) return;
-                int chaos = Mathf.RoundToInt(Mathf.FloorToInt(PLServer.Instance.ChaosLevel) + UnityEngine.Random.Range(0, 2) + Mathf.CeilToInt(inPlayer.StartingShip.GetCombatLevel() / 20) * UnityEngine.Random.Range(0.70f, 1f) * (Options.ScalingToPlayerShipLevel ? 1 : 0));
+                int chaos = Mathf.RoundToInt(Mathf.FloorToInt(PLServer.Instance.ChaosLevel) + UnityEngine.Random.Range(0, 2) + Mathf.CeilToInt(inPlayer.StartingShip.GetCombatLevel() / 20) * UnityEngine.Random.Range(0.70f, 1f));
                 inPlayer.Talents[56] = chaos;//Armor
                 inPlayer.Talents[58] = chaos;//Armor2
                 inPlayer.Talents[0] = chaos;//Health
