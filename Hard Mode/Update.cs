@@ -12,6 +12,7 @@ namespace Hard_Mode
     [HarmonyPatch(typeof(PLShipInfoBase), "Update")]
     class Update
     {
+        public static float HardModeSettingsSyncTime = 0;
         public static float timer = 1;
         public static float LastGalaxySync = Time.time;
         static void Postfix(PLShipInfoBase __instance)
@@ -37,16 +38,21 @@ namespace Hard_Mode
                 Custom_Bounty_Hunters.BountyHunterBalance.MinCombatLevel = 1.2f + PLServer.Instance.ChaosLevel / 15;
                 Custom_Bounty_Hunters.RelicHunterBalance.MaxCombatLevel = 1.5f + PLServer.Instance.ChaosLevel / 5;
                 Custom_Bounty_Hunters.RelicHunterBalance.MinCombatLevel = 1.2f + PLServer.Instance.ChaosLevel / 10;
-                ModMessage.SendRPC("modders.hardmode", "Hard_Mode.ReciveOptions", PhotonTargets.Others, new object[] //This is responsible to send the options to all clients
+                if (Time.time - HardModeSettingsSyncTime > 5)
                 {
-                    Options.FogOfWar,
-                    Options.DangerousReactor,
-                    Options.MasterHasMod,
-                    Options.WeakReactor,
-                    Options.SpinningCycpher,
-                    Options.AdvancedCloak,
-                    Options.ScalingToPlayerShipLevel,
-                });
+                    HardModeSettingsSyncTime = Time.time;
+                    ModMessage.SendRPC("modders.hardmode", "Hard_Mode.ReciveOptions", PhotonTargets.Others, new object[] //This is responsible to send the options to all clients
+                    {
+                        Options.FogOfWar,
+                        Options.DangerousReactor,
+                        Options.MasterHasMod,
+                        Options.WeakReactor,
+                        Options.SpinningCycpher,
+                        Options.AdvancedCloak,
+                        Options.ScalingToPlayerShipLevel,
+                    });
+                }
+                
                 if (Time.time - LastGalaxySync > 30 && PLServer.GetCurrentSector().VisualIndication != ESectorVisualIndication.ABYSS)//Syncs the discovered sectors with all clients every 30 seconds
                 {
                     foreach (PLSectorInfo sector in PLGlobal.Instance.Galaxy.AllSectorInfos.Values)
