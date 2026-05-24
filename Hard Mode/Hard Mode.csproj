@@ -16,7 +16,7 @@
 
   <ItemGroup>
     <Reference Include="PulsarModLoader">
-      <HintPath>..\packages\PulsarModLoader.dll</HintPath>
+      <HintPath>lib\PulsarModLoader.dll</HintPath>
       <Private>False</Private>
     </Reference>
   </ItemGroup>
