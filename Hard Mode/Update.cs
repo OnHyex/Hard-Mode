@@ -95,8 +95,10 @@ namespace Hard_Mode
                 }
                 if(PLServer.GetCurrentSector().VisualIndication != ESectorVisualIndication.ABYSS)
                 {
-                    foreach (PLShipInfoBase ship in FindObjectsOfType(typeof(PLShipInfoBase)))
+                    foreach (PLShipInfoBase ship in PLEncounterManager.Instance.AllShips.Values)
                     {
+                        if (ship is null)
+                            continue;
                         if (!(ship is PLHighRollersShipInfo) && ship.MyStats != null && ship.ShipTypeID != EShipType.E_ACADEMY)
                         {
                             if (!ship.IsDrone && !ship.IsInfected && ship.ShipTypeID != EShipType.E_CIVILIAN_FUEL && !__instance.InWarp) //This makes all boardable ships with the shields offline lose 10% of integrity per second
@@ -121,8 +123,10 @@ namespace Hard_Mode
                             }
                             if (!ship.GetIsPlayerShip() && ship.ShipTypeID != EShipType.E_CIVILIAN_FUEL && ship.ShipTypeID != EShipType.E_BEACON && !ship.HasModifier(EShipModifierType.CORRUPTED)) //This should make attacking one ship all it's friends will attack you (execpt beacon)
                             {
-                                foreach (PLShipInfoBase Allied in FindObjectsOfType(typeof(PLShipInfoBase)))
+                                foreach (PLShipInfoBase Allied in PLEncounterManager.Instance.AllShips.Values)
                                 {
+                                    if (Allied is null)
+                                        continue;
                                     if (!(Allied is PLHighRollersShipInfo) && Allied.ShipTypeID != EShipType.E_ACADEMY && Allied.MyStats != null && Allied.FactionID == ship.FactionID && !Allied.HostileShips.Contains(ship.ShipID) && Allied.ShipTypeID != EShipType.E_BEACON && !Allied.HasModifier(EShipModifierType.CORRUPTED))
                                     {
                                         if (Allied.GetIsPlayerShip())
