@@ -54,6 +54,7 @@ namespace Hard_Mode
                 }
                 
                 if (Time.time - LastGalaxySync > 30 && PLServer.GetCurrentSector().VisualIndication != ESectorVisualIndication.ABYSS)//Syncs the discovered sectors with all clients every 30 seconds
+                if (Options.FogOfWar && Time.time - LastGalaxySync > 30 && PLServer.GetCurrentSector().VisualIndication != ESectorVisualIndication.ABYSS)//Syncs the discovered sectors with all clients every 30 seconds
                 {
                     foreach (PLSectorInfo sector in PLGlobal.Instance.Galaxy.AllSectorInfos.Values)
                     {

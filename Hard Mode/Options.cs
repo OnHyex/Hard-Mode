@@ -63,6 +63,10 @@ namespace Hard_Mode
     {
         static void Postfix(PhotonMessageInfo pmi) 
         {
+            if (!Options.FogOfWar)
+            {
+                return;
+            }
             foreach (PLSectorInfo sector in PLGlobal.Instance.Galaxy.AllSectorInfos.Values) 
             {
                 if (sector.Discovered)
